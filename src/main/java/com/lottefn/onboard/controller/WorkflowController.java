@@ -18,9 +18,9 @@ public class WorkflowController {
     @PostMapping("/start")
     public ResponseEntity<WorkflowInstance> startWorkflow(@RequestBody Map<String, String> input) {
         String orderId = input.get("orderId");
-        String phone = input.get("phone");
-        String userId = input.get("userId");
-        WorkflowInstance instance = workflowService.createWorkflow(orderId, phone, userId);
+//        String phone = input.get("phone");
+//        String userId = input.get("userId");
+        WorkflowInstance instance = workflowService.createWorkflow(orderId);
         return ResponseEntity.ok(instance);
     }
 
@@ -28,9 +28,13 @@ public class WorkflowController {
     @PostMapping("/{id}/event")
     public ResponseEntity<WorkflowInstance> sendEvent(
             @PathVariable("id") Long id,
-            @RequestParam("event") Events event,
+            @RequestParam(value = "event", required = false) String event,
             @RequestBody(required = false) Map<String, Object> data) throws Exception {
-        if(data == null) data = new HashMap<>();
+        if (data == null) data = new HashMap<>();
+        if (event == "" || event == null) {
+            WorkflowInstance instance = workflowService.getWorkflowInstance(id);
+            event = instance.getCurrentState();
+        }
         WorkflowInstance instance = workflowService.handleEvent(id, event, data);
         return ResponseEntity.ok(instance);
     }

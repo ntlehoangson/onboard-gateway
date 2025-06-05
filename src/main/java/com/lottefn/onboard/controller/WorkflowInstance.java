@@ -19,8 +19,7 @@ public class WorkflowInstance {
 
     private String userId;
 
-    @Enumerated(EnumType.STRING)
-    private States currentState;
+    private String currentState;
 
 
 //    @ElementCollection(fetch = FetchType.EAGER)
@@ -30,7 +29,7 @@ public class WorkflowInstance {
 
     // Dữ liệu verify
     private String username;
-    private Boolean userExists;
+    private Boolean firstAuthen;
     private Boolean forgotPassword;
     private Boolean otpSent;
     private Boolean passwordSetFirstTime;

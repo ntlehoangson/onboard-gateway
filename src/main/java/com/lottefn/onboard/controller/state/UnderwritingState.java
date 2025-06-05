@@ -13,9 +13,9 @@ public class UnderwritingState implements WorkflowState {
     }
 
     @Override
-    public void handleEvent(WorkflowInstance instance, Events event, Map<String, Object> data) throws Exception {
-        if (event == Events.UW_DONE) {
-            instance.setCurrentState(States.COMPLETE);
+    public void handleEvent(WorkflowInstance instance, String event, Map<String, Object> data) throws Exception {
+        if (event == Events.UW_DONE.name()) {
+            instance.setCurrentState(States.COMPLETE.name());
         } else {
             throw new IllegalStateException("Invalid event for UNDERWRITING");
         }

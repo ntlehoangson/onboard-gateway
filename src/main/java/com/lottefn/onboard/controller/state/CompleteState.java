@@ -13,7 +13,7 @@ public class CompleteState implements WorkflowState {
     }
 
     @Override
-    public void handleEvent(WorkflowInstance instance, Events event, Map<String, Object> data) throws Exception {
+    public void handleEvent(WorkflowInstance instance, String event, Map<String, Object> data) throws Exception {
         throw new IllegalStateException("Workflow already completed");
     }
 

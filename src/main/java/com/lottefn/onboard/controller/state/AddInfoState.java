@@ -13,11 +13,11 @@ public class AddInfoState implements WorkflowState {
     }
 
     @Override
-    public void handleEvent(WorkflowInstance instance, Events event, Map<String, Object> data) throws Exception {
-        if (event == Events.ADD_INFO_DONE) {
+    public void handleEvent(WorkflowInstance instance, String event, Map<String, Object> data) throws Exception {
+        if (event == Events.ADD_INFO_DONE.name()) {
             instance.setTenCoQuan((String) data.get("tenCoQuan"));
             instance.setSoLanAccept((Integer) data.get("soLanAccept"));
-            instance.setCurrentState(States.UNDERWRITING);
+            instance.setCurrentState(States.UNDERWRITING.name());
         } else {
             throw new IllegalStateException("Invalid event for ADD_INFO");
         }

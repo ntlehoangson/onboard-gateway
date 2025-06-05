@@ -9,5 +9,6 @@ public enum States {
     E_KYC,
     ADD_INFO,
     UNDERWRITING,
-    COMPLETE
+    COMPLETE,
+    SET_PASSWORD_FIRST_TIME
 }

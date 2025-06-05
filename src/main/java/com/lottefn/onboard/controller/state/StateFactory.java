@@ -12,11 +12,13 @@ public class StateFactory {
     @Autowired
     private WorkflowInstanceRepository repository;
 
-    public WorkflowState getState(States state) {
+    public WorkflowState getState(String stateStr) {
+        States state = States.valueOf(stateStr);
         return switch (state) {
             case VERIFY_START -> new VerifyStartState(repository);
             case VERIFY_CHECK_USER -> new VerifyCheckUserState(repository);
             case VERIFY_FORGOT_PASS -> new VerifyForgotPassState(repository);
+            case SET_PASSWORD_FIRST_TIME -> new PasswordFirstTimeState(repository);
             case VERIFY_ENTER_PASS -> new VerifyEnterPassState(repository);
             case VERIFY_RESET_PASS -> new VerifyResetPassState(repository);
             case E_KYC -> new EKYCState(repository);

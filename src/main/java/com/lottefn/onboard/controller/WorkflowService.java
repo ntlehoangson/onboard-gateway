@@ -15,17 +15,15 @@ public class WorkflowService {
     @Autowired
     private StateFactory stateFactory;
 
-    public WorkflowInstance createWorkflow(String orderId, String phone, String userId) {
+    public WorkflowInstance createWorkflow(String orderId) {
         WorkflowInstance instance = new WorkflowInstance();
         instance.setOrderId(orderId);
-        instance.setPhone(phone);
-        instance.setUserId(userId);
-        instance.setCurrentState(States.VERIFY_START);
+        instance.setCurrentState(States.VERIFY_START.name());
         repository.save(instance);
         return instance;
     }
 
-    public WorkflowInstance handleEvent(Long instanceId, Events event, Map<String, Object> data) throws Exception {
+    public WorkflowInstance handleEvent(Long instanceId, String event, Map<String, Object> data) throws Exception {
         WorkflowInstance instance = repository.findById(instanceId)
                 .orElseThrow(() -> new IllegalArgumentException("WorkflowInstance không tồn tại"));
 
